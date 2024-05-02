@@ -29,7 +29,7 @@ export default function SavedResultCard({
 }: Props) {
   // const [logsArr, setLogsArray] = useState<Log[]>([]);
   const [logsArr, setLogsArray] = useState<Log[]>(
-    getFv().map((fv: number, index: number) => ({ fv, id: index })) || []
+    getFv().map((fv: number, index: number) => ({ fv, id: index })) || [{ fv:100, id: 0 }]
   );
 
   const dispatch = useDispatch();
