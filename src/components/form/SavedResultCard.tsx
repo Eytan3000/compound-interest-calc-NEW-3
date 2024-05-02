@@ -27,21 +27,31 @@ export default function SavedResultCard({
   isMobile,
   handleClose,
 }: Props) {
-  // const [logsArr, setLogsArray] = useState<Log[]>([]);
-  const [logsArr, setLogsArray] = useState<Log[]>(
-    getFv().map((fv: number, index: number) => ({ fv, id: index })) || [{ fv:100, id: 0 }]
-  );
+  const futureVals = getFv();
+  let FVCardsData: Log[] = [];
+  if (futureVals.length)
+    FVCardsData = futureVals.map((fv: number, index: number) => ({
+      fv,
+      id: index,
+    }));
+
+  const [logsArr, setLogsArray] = useState<Log[]>(FVCardsData);
+  const [clickedId, setClickedId] = useState<number>();
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    setLogsArray(
-      getFv().map((fv: number, index: number) => ({ fv, id: index }))
-    );
+    setClickedId(0);
+    if (!getFv().length) setLogsArray([]);
+    else
+      setLogsArray(
+        getFv().map((fv: number, index: number) => ({ fv, id: index }))
+      );
   }, [dataPosted]);
 
   async function handleCardClick(id: number) {
     const log = getLog(id);
+    setClickedId(id);
     if (!log) return;
     if (handleClose) handleClose();
     // dispatcing states to see them in the form values
@@ -103,7 +113,7 @@ export default function SavedResultCard({
                 marginY: 2,
                 textAlign: 'center',
                 cursor: 'pointer',
-                background: item.id === index ? '#e3effbff' : null,
+                background: clickedId === index ? '#e3effbff' : null,
               }}>
               {' '}
               ${Math.floor(item.fv).toLocaleString()}

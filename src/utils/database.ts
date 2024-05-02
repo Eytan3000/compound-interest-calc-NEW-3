@@ -46,6 +46,8 @@ interface FormData {
 }
 export function getFv() {
   const existingDataStr = localStorage.getItem('compResults') as string;
+  if (!existingDataStr) return [];
+
   const existingData: FormData[] = JSON.parse(existingDataStr);
   return existingData.map((data) => data.fv);
 }
