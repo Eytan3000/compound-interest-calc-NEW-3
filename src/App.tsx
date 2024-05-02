@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
-import { Box, Theme, Typography } from '@mui/joy';
+import { Box, ModalClose, ModalDialog, Theme, Typography } from '@mui/joy';
 import ResponsiveAppBar from './components/ui/ResponsiveAppBar';
 import SumsCard from './components/ui/SumsCard';
 import News from './news/News';
@@ -20,7 +20,7 @@ function App() {
   const [dataPosted, setDataPosted] = useState<boolean>(false); // postData function re-renders savedResultCard after saving details to db
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const reduxSubmit = useSelector((state:any) => state.app.submit);
+  const reduxSubmit = useSelector((state: any) => state.app.submit);
 
   //get the size of screen
   useEffect(() => {
@@ -61,14 +61,21 @@ function App() {
     <>
       <ResponsiveAppBar isMobile={isMobile} handleOpen={handleOpen} />
 
- <Modal
+      <Modal
         open={menuOpen}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description">
-        <SavedResultCard handleClose={handleClose} isMobile={isMobile} dataPosted={dataPosted} />
+        <ModalDialog>
+          <ModalClose />
+          <SavedResultCard
+            handleClose={handleClose}
+            isMobile={isMobile}
+            dataPosted={dataPosted}
+          />
+        </ModalDialog>
       </Modal>
-      
+
       <Box
         display={'flex'}
         justifyContent={'center'}
