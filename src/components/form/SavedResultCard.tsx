@@ -2,11 +2,7 @@ import { useEffect, useState } from 'react';
 import { Card, Typography } from '@mui/joy';
 import { getFv, getLog } from '../../utils/database';
 import { useDispatch } from 'react-redux';
-import {
-  appActions,
-  formActions,
-  sumsValuesActions,
-} from '../../store';
+import { appActions, formActions, sumsValuesActions } from '../../store';
 import { calculateFutureValue, formatSums } from '../../utils/helpers';
 
 import { combineReducers } from '@reduxjs/toolkit';
@@ -33,7 +29,7 @@ export default function SavedResultCard({
 }: Props) {
   // const [logsArr, setLogsArray] = useState<Log[]>([]);
   const [logsArr, setLogsArray] = useState<Log[]>(
-    getFv().map((fv: number, index: number) => ({ fv, id: index }))
+    getFv().map((fv: number, index: number) => ({ fv, id: index })) || []
   );
 
   const dispatch = useDispatch();
