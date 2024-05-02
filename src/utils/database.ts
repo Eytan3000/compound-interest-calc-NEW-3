@@ -53,5 +53,5 @@ export function getFv() {
 export function getLog(id: number) {
   const existingDataStr = localStorage.getItem('compResults') as string;
   const existingData: FormData[] = JSON.parse(existingDataStr);
-  return existingData.find((data, index) => index === id);
+  return existingData.find((_data, index) => index === id);
 }
