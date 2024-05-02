@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Card, Typography } from '@mui/joy';
 import { getFv, getLog } from '../../utils/database';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import {
   appActions,
   formActions,
@@ -35,8 +35,6 @@ export default function SavedResultCard({
   const [logsArr, setLogsArray] = useState<Log[]>(
     getFv().map((fv: number, index: number) => ({ fv, id: index }))
   );
-
-  const idState = useSelector((state: RootState) => state.resultCard.id);
 
   const dispatch = useDispatch();
 
@@ -109,7 +107,7 @@ export default function SavedResultCard({
                 marginY: 2,
                 textAlign: 'center',
                 cursor: 'pointer',
-                background: item.id === idState ? '#e3effbff' : null,
+                background: item.id === index ? '#e3effbff' : null,
               }}>
               {' '}
               ${Math.floor(item.fv).toLocaleString()}
